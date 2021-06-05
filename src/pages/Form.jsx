@@ -3,22 +3,49 @@ import FirstStep from "../components/Form/FirstStep";
 import SecondStep from "../components/Form/SecondStep";
 import ThirdStep from "../components/Form/ThirdStep";
 
+const INITIAL_STATE = {
+  email: {
+    value: "",
+    error: false,
+    message: "",
+  },
+  password: {
+    value: "",
+    error: false,
+    message: "",
+  },
+  passwordConfirmation: {
+    value: "",
+    error: false,
+    message: "",
+  },
+  name: {
+    value: "",
+    error: false,
+    message: "",
+  },
+  surName: {
+    value: "",
+    error: false,
+    message: "",
+  },
+  birthDate: {
+    value: "",
+    error: false,
+    message: "",
+  },
+  fullAddress: {
+    value: "",
+    error: false,
+    message: "",
+  },
+  step: 1,
+};
+
 class Form extends React.Component {
   constructor() {
     super();
-    this.state = {
-      email: "",
-      password: "",
-      passwordConfirmation: "",
-
-      name: "",
-      surName: "",
-      birthDate: "",
-
-      fullAddress: "",
-
-      step: 1,
-    };
+    this.state = INITIAL_STATE;
   }
 
   changeStep = (nextStep = false) => {
@@ -33,20 +60,60 @@ class Form extends React.Component {
   };
 
   handleChanges = ({ target: { name, value } }) => {
-    console.log(name);
-    this.setState({ [name]: value });
+    this.setState((prevState) => {
+      return {
+        [name]: Object.assign({}, prevState[name], { value }),
+      };
+    });
+  };
+
+  setInputError = (event, check, ...params) => {
+    const errorMessage = check(...params);
+
+    const { name } = event.target;
+    if (errorMessage) {
+      this.setState((prevState) => {
+        return {
+          [name]: { ...prevState[name], error: true, message: errorMessage },
+        };
+      });
+    } else {
+      this.setState((prevState) => {
+        console.log(prevState[name]);
+        return {
+          [name]: { ...prevState[name], error: true, message: errorMessage },
+        };
+      });
+    }
   };
 
   renderFormStep = () => {
     const { step } = this.state;
-
     switch (step) {
       case 1:
-        return <FirstStep handleChanges={this.handleChanges} values={this.state} />;
+        return (
+          <FirstStep
+            checkInput={this.setInputError}
+            handleChanges={this.handleChanges}
+            values={this.state}
+          />
+        );
       case 2:
-        return <SecondStep handleChanges={this.handleChanges} values={this.state} />;
+        return (
+          <SecondStep
+            checkInput={this.setInputError}
+            handleChanges={this.handleChanges}
+            values={this.state}
+          />
+        );
       case 3:
-        return <ThirdStep handleChanges={this.handleChanges} values={this.state} />;
+        return (
+          <ThirdStep
+            checkInput={this.setInputError}
+            handleChanges={this.handleChanges}
+            values={this.state}
+          />
+        );
       default:
         break;
     }
