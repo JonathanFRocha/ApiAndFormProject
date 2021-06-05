@@ -1,3 +1,11 @@
 .input--error {
   border: 1px solid red;
 }
+
+.form__fieldset--error {
+  border: 1px solid red;
+}
+
+.form__fieldset--ok {
+  border: 1px solid aqua;
+}

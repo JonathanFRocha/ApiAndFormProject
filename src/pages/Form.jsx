@@ -3,6 +3,8 @@ import FirstStep from "../components/Form/FirstStep";
 import SecondStep from "../components/Form/SecondStep";
 import ThirdStep from "../components/Form/ThirdStep";
 
+import "./Form.css";
+
 const INITIAL_STATE = {
   email: {
     value: "",
@@ -59,10 +61,18 @@ class Form extends React.Component {
     }
   };
 
+  checkIfStepHasErrors = (...args) => {
+    let hasError = false;
+    args.forEach(({ error }) => {
+      if (error) hasError = true;
+    });
+    return hasError;
+  };
+
   handleChanges = ({ target: { name, value } }) => {
     this.setState((prevState) => {
       return {
-        [name]: Object.assign({}, prevState[name], { value }),
+        [name]: { ...prevState[name], value },
       };
     });
   };
@@ -81,20 +91,24 @@ class Form extends React.Component {
       this.setState((prevState) => {
         console.log(prevState[name]);
         return {
-          [name]: { ...prevState[name], error: true, message: errorMessage },
+          [name]: { ...prevState[name], error: false, message: "" },
         };
       });
     }
   };
 
   renderFormStep = () => {
-    const { step } = this.state;
+    const { step, email, password, passwordConfirmation, name, surName, birthDate, fullAddress } =
+      this.state;
+    const firstStepHasError = this.checkIfStepHasErrors(email, password, passwordConfirmation);
+
     switch (step) {
       case 1:
         return (
           <FirstStep
             checkInput={this.setInputError}
             handleChanges={this.handleChanges}
+            stepHasError={firstStepHasError}
             values={this.state}
           />
         );
@@ -121,11 +135,22 @@ class Form extends React.Component {
 
   render() {
     const currentForm = this.renderFormStep();
+    const { email, password, passwordConfirmation, name, surName, birthDate, fullAddress } =
+      this.state;
+    const firstStepHasError = this.checkIfStepHasErrors(email, password, passwordConfirmation);
+
     return (
       <div>
         <ul>
           <li>
-            <button onClick={() => this.changeStep(1)}>first step</button>
+            <button
+              className={`form__changeStepBtn ${
+                firstStepHasError ? "form__changeStepBtn--error" : "form__changeStepBtn--ok"
+              }`}
+              onClick={() => this.changeStep(1)}
+            >
+              first step
+            </button>
           </li>
           <li>
             <button onClick={() => this.changeStep(2)}>second step</button>
@@ -135,7 +160,7 @@ class Form extends React.Component {
           </li>
         </ul>
         <form action="#">
-          <fieldset>{currentForm}</fieldset>
+          <div>{currentForm}</div>
           <div>
             <button onClick={() => this.changeStep()} type="button">
               Next

@@ -1,44 +1,63 @@
 import React from "react";
 
 class SecondStep extends React.Component {
+  renderInputError = (inputName) => {
+    const inputHasError = this.props.values[inputName].error;
+
+    if (inputHasError) {
+      return "input--error";
+    }
+    return "noErrorClass";
+  };
+
   render() {
     const {
-      values: { name, surName, birthDate },
+      values: {
+        name: { value: namevalue, message: nameErrorMessage },
+        surName: { value: surNameValue, message: surNameErrorMessage },
+        birthDate: { value: birthDateValue, message: birthDateErrorMessage },
+      },
       handleChanges,
+      checkInput,
+      stepHasError,
     } = this.props;
 
     return (
-      <div>
+      <fieldset>
         <input
           name="name"
           id="nameInput"
+          className={this.renderInputError("name")}
           type="text"
           required
           placeholder="Name"
-          value={name}
+          value={namevalue}
           onChange={handleChanges}
         />
-
+        <span>{nameErrorMessage}</span>
         <input
           name="surName"
           id="surName"
+          className={this.renderInputError("surName")}
           type="text"
           required
           placeholder="Surname"
-          value={surName}
+          value={surNameValue}
           onChange={handleChanges}
         />
-
+        <span>{surNameErrorMessage}</span>
         <input
           name="birthDate"
           id="birthDate"
+          className={this.renderInputError("birthDate")}
           type="date"
           required
           placeholder="birthDate"
-          value={birthDate}
+          value={birthDateValue}
           onChange={handleChanges}
         />
-      </div>
+        <span>{birthDateErrorMessage}</span>
+      </fieldset>
     );
   }
 }

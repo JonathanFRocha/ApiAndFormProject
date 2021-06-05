@@ -1,0 +1,7 @@
+.form__changeStepBtn--error {
+  background-color: red;
+}
+
+.form__changeStepBtn--ok {
+  background-color: aqua;
+}
