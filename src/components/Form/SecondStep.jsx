@@ -30,42 +30,48 @@ class SecondStep extends React.Component {
           stepHasError ? "form__fieldset--error" : "form__fieldset--ok"
         }`}
       >
-        <input
-          name="name"
-          id="nameInput"
-          className={this.renderInputError("name")}
-          type="text"
-          required
-          placeholder="Name"
-          value={namevalue}
-          onChange={handleChanges}
-          onBlur={(e) => checkInput(e, stringCheck, "Name", namevalue)}
-        />
-        <span>{nameErrorMessage}</span>
-        <input
-          name="surName"
-          id="surName"
-          className={this.renderInputError("surName")}
-          type="text"
-          required
-          placeholder="Surname"
-          value={surNameValue}
-          onChange={handleChanges}
-          onBlur={(e) => checkInput(e, stringCheck, "Surname", surNameValue)}
-        />
-        <span>{surNameErrorMessage}</span>
-        <input
-          name="birthDate"
-          id="birthDate"
-          className={this.renderInputError("birthDate")}
-          type="date"
-          required
-          placeholder="dd/mm/yyyy"
-          value={birthDateValue}
-          onChange={handleChanges}
-          onBlur={(e) => checkInput(e, birthdateCheck, birthDateValue)}
-        />
-        <span>{birthDateErrorMessage}</span>
+        <div className="form__input__container">
+          <input
+            name="name"
+            id="nameInput"
+            className={`form__input ${this.renderInputError("name")}`}
+            type="text"
+            required
+            placeholder="Name"
+            value={namevalue}
+            onChange={handleChanges}
+            onBlur={(e) => checkInput(e, stringCheck, "Name", namevalue)}
+          />
+          <span className="form__input--error__message">{nameErrorMessage}</span>
+        </div>
+        <div className="form__input__container">
+          <input
+            name="surName"
+            id="surName"
+            className={`form__input ${this.renderInputError("surName")}`}
+            type="text"
+            required
+            placeholder="Surname"
+            value={surNameValue}
+            onChange={handleChanges}
+            onBlur={(e) => checkInput(e, stringCheck, "Surname", surNameValue)}
+          />
+          <span className="form__input--error__message">{surNameErrorMessage}</span>
+        </div>
+        <div className="form__input__container">
+          <input
+            name="birthDate"
+            id="birthDate"
+            className={`form__input ${this.renderInputError("birthDate")}`}
+            type="date"
+            required
+            placeholder="dd/mm/yyyy"
+            value={birthDateValue}
+            onChange={handleChanges}
+            onBlur={(e) => checkInput(e, birthdateCheck, birthDateValue)}
+          />
+          <span className="form__input--error__message">{birthDateErrorMessage}</span>
+        </div>
       </fieldset>
     );
   }

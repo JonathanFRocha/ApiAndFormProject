@@ -1,7 +1,7 @@
 .main {
   background-color: #f9fbfd;
 
-  min-height: calc(100vh - 85px);
+  min-height: calc(100vh - 120px);
   display: flex;
   justify-content: center;
   align-items: center;

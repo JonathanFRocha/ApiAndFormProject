@@ -1,11 +1,40 @@
+.form__input__container {
+  margin: 1rem 0 0.3rem;
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.form__input {
+  border: 1px solid #f4f4f4;
+  border-radius: 5px;
+
+  background-color: #ffffff;
+  font-size: 1em;
+
+  height: 35px;
+  width: 60%;
+
+  padding-left: 10px;
+}
+
+.form__input--error__message {
+  font-size: 0.9em;
+  color: red;
+}
+
 .input--error {
-  border: 1px solid red;
+  border: 1px solid #fe856e;
 }
 
 .form__fieldset--error {
-  border: 1px solid red;
+  border: 3px solid #fe856e;
+  transition: all 0.3s;
 }
 
 .form__fieldset--ok {
-  border: 1px solid aqua;
+  border: 3px solid #a6d451;
+  transition: all 0.3s;
 }

@@ -27,17 +27,19 @@ class ThirdStep extends React.Component {
           stepHasError ? "form__fieldset--error" : "form__fieldset--ok"
         }`}
       >
-        <input
-          name="fullAddress"
-          id="fullAddress"
-          className={this.renderInputError("fullAddress")}
-          type="text"
-          placeholder="please enter your full address"
-          value={fullAddressvalue}
-          onChange={handleChanges}
-          onBlur={(e) => checkInput(e, fullAddressCheck, fullAddressvalue)}
-        />
-        <span>{fullAddressErrorMessage}</span>
+        <div className="form__input__container">
+          <input
+            name="fullAddress"
+            id="fullAddress"
+            className={`form__input ${this.renderInputError("fullAddress")}`}
+            type="text"
+            placeholder="please enter your full address"
+            value={fullAddressvalue}
+            onChange={handleChanges}
+            onBlur={(e) => checkInput(e, fullAddressCheck, fullAddressvalue)}
+          />
+          <span className="form__input--error__message">{fullAddressErrorMessage}</span>
+        </div>
       </fieldset>
     );
   }

@@ -33,39 +33,45 @@ class FirstStep extends React.Component {
           stepHasError ? "form__fieldset--error" : "form__fieldset--ok"
         }`}
       >
-        <input
-          name="email"
-          id="emailInput"
-          className={this.renderInputError("email")}
-          type="email"
-          placeholder="Email"
-          value={emailvalue}
-          onChange={handleChanges}
-          onBlur={(e) => checkInput(e, emailCheck, emailvalue)}
-        />
-        <span>{emailErrorMessage}</span>
-        <input
-          name="password"
-          id="passwordInput"
-          className={this.renderInputError("password")}
-          type="password"
-          placeholder="Password"
-          value={passwordValue}
-          onChange={handleChanges}
-          onBlur={(e) => checkInput(e, passwordCheck, passwordValue)}
-        />
-        <span>{passwordErrorMessage}</span>
-        <input
-          name="passwordConfirmation"
-          id="confirmPassword"
-          className={this.renderInputError("passwordConfirmation")}
-          type="password"
-          placeholder="Confirm your Password"
-          value={passwordConfirmationValue}
-          onChange={handleChanges}
-          onBlur={(e) => checkInput(e, passwordCheck, passwordValue, passwordConfirmationValue)}
-        />
-        <span>{passwordConfirmationErrorMessage}</span>
+        <div className="form__input__container">
+          <input
+            name="email"
+            id="emailInput"
+            className={`form__input ${this.renderInputError("email")}`}
+            type="email"
+            placeholder="Email"
+            value={emailvalue}
+            onChange={handleChanges}
+            onBlur={(e) => checkInput(e, emailCheck, emailvalue)}
+          />
+          <span className="form__input--error__message">{emailErrorMessage}</span>
+        </div>
+        <div className="form__input__container">
+          <input
+            name="password"
+            id="passwordInput"
+            className={`form__input ${this.renderInputError("password")}`}
+            type="password"
+            placeholder="Password"
+            value={passwordValue}
+            onChange={handleChanges}
+            onBlur={(e) => checkInput(e, passwordCheck, passwordValue)}
+          />
+          <span className="form__input--error__message">{passwordErrorMessage}</span>
+        </div>
+        <div className="form__input__container">
+          <input
+            name="passwordConfirmation"
+            id="confirmPassword"
+            className={`form__input ${this.renderInputError("passwordConfirmation")}`}
+            type="password"
+            placeholder="Confirm your Password"
+            value={passwordConfirmationValue}
+            onChange={handleChanges}
+            onBlur={(e) => checkInput(e, passwordCheck, passwordValue, passwordConfirmationValue)}
+          />
+          <span className="form__input--error__message">{passwordConfirmationErrorMessage}</span>
+        </div>
       </fieldset>
     );
   }

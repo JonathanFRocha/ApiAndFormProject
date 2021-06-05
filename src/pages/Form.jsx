@@ -155,8 +155,8 @@ class Form extends React.Component {
     const secondStepHasError = this.checkIfStepHasErrors(name, surName, birthDate);
     const thirdStepHasError = this.checkIfStepHasErrors(fullAddress);
     return (
-      <div>
-        <ul>
+      <div className="main__form">
+        <ul className="form__stepBtnList">
           <li>
             <button
               className={`form__changeStepBtn ${
@@ -164,7 +164,7 @@ class Form extends React.Component {
               }`}
               onClick={() => this.changeStep(1)}
             >
-              first step
+              1
             </button>
           </li>
           <li>
@@ -174,7 +174,7 @@ class Form extends React.Component {
               }`}
               onClick={() => this.changeStep(2)}
             >
-              second step
+              2
             </button>
           </li>
           <li>
@@ -184,18 +184,18 @@ class Form extends React.Component {
               }`}
               onClick={() => this.changeStep(3)}
             >
-              {" "}
-              third step
+              3
             </button>
           </li>
         </ul>
         <form action="#">
           <div>{currentForm}</div>
-          <div>
-            <button onClick={() => this.changeStep()} type="button">
+          <div className="form__next-submit-btns__container">
+            <button className="form__next-btn" onClick={() => this.changeStep()} type="button">
               Next
             </button>
             <button
+              className="form__submit-btn"
               disabled={firstStepHasError || secondStepHasError || thirdStepHasError}
               type="submit"
             >
