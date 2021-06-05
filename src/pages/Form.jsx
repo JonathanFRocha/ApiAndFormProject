@@ -56,7 +56,8 @@ class Form extends React.Component {
     super();
     this.state = INITIAL_STATE;
   }
-
+  // altera o estado Step baseado de onde veio o click. Caso venha dos botões superiores, então a função é passada com um número "step".
+  // caso contrário, se vier do botão "next" então verifica se o step e o 3 e atualiza para 1 ou atualiza para o estado anterior + 1
   changeStep = (nextStep = false) => {
     const currentStep = this.state.step;
     if (nextStep) {
@@ -67,7 +68,7 @@ class Form extends React.Component {
       this.setState({ step: currentStep + 1 });
     }
   };
-
+  // baseado nos estados passados, é feito uma iteração e verificação se o estado é required e se a chave "error" está como true
   checkIfStepHasErrors = (...args) => {
     let hasError = false;
     args.forEach((input) => {
@@ -78,7 +79,7 @@ class Form extends React.Component {
     });
     return hasError;
   };
-
+  // Atualiza o valores do estado.
   handleChanges = ({ target: { name, value } }) => {
     this.setState((prevState) => {
       return {
@@ -87,6 +88,8 @@ class Form extends React.Component {
     });
   };
 
+  // função responsável por verificar se há algum erro no onBlur. é passado o event para verificar quem tá chamando, a função cb de checagem de erros
+  // e então todas os parâmetros para verificação dos inputs.
   setInputError = (event, check, ...params) => {
     const errorMessage = check(...params);
 
@@ -107,6 +110,8 @@ class Form extends React.Component {
     }
   };
 
+  // Renderiza o formulário baseado no número guardado no estado Step, além de passar todas as funções.
+  // também verifica se há algum elemento com erro no estado e então passa essa informação para os respectivos componentes.
   renderFormStep = () => {
     const { step, email, password, passwordConfirmation, name, surName, birthDate, fullAddress } =
       this.state;
@@ -148,9 +153,13 @@ class Form extends React.Component {
   };
 
   render() {
-    const currentForm = this.renderFormStep();
     const { email, password, passwordConfirmation, name, surName, birthDate, fullAddress, step } =
       this.state;
+
+    //Verifica qual é o form atual
+    const currentForm = this.renderFormStep();
+
+    // Checa quais etapas tem erro e atualiza as classes dos elementos dentro do return
     const firstStepHasError = this.checkIfStepHasErrors(email, password, passwordConfirmation);
     const secondStepHasError = this.checkIfStepHasErrors(name, surName, birthDate);
     const thirdStepHasError = this.checkIfStepHasErrors(fullAddress);
@@ -196,6 +205,7 @@ class Form extends React.Component {
             </button>
             <button
               className="form__submit-btn"
+              // Se não existir mais nenhum erro, então o disabled fica como false
               disabled={firstStepHasError || secondStepHasError || thirdStepHasError}
               type="submit"
             >
@@ -209,14 +219,3 @@ class Form extends React.Component {
 }
 
 export default Form;
-
-// A primeira etapa deve solicitar:
-// Email (obrigatório)
-// Senha (obrigatório)
-// Confirmação de senha (obrigatório)
-// A segunda etapa deve solicitar:
-// Nome (obrigatório)
-// Sobrenome (obrigatório)
-// Data de nacimento
-// A terceira etapa deve solicitar:
-// Endereço completo (obrigatório)
