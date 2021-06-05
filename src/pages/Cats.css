@@ -1,4 +1,9 @@
 .main {
+  background-color: #f9fbfd;
+
+  min-height: calc(100vh - 85px);
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
 }

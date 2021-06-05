@@ -1,6 +1,6 @@
 import React from "react";
 import { emailCheck, passwordCheck } from "../../services/checkFormInput";
-import "./FirstStep.css";
+import "./allSteps.css";
 
 class FirstStep extends React.Component {
   renderInputError = (inputName) => {

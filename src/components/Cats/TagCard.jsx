@@ -48,7 +48,7 @@ class TagCard extends React.Component {
     const { ids } = this.state;
 
     return ids.map((id) => {
-      return <p key={id}>{id}</p>;
+      return <li key={id}>{id}</li>;
     });
   }
 
@@ -61,7 +61,9 @@ class TagCard extends React.Component {
         <h3 className="tagCard__name" onClick={this.handleTagClick}>
           {tag}
         </h3>
-        <div className="tagCard__content__container">{renderedIds}</div>
+        <div className="tagCard__content__container">
+          <ul>{renderedIds}</ul>
+        </div>
       </div>
     );
   }

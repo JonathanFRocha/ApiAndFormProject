@@ -10,36 +10,43 @@ const INITIAL_STATE = {
     value: "",
     error: false,
     message: "",
+    required: true,
   },
   password: {
     value: "",
     error: false,
     message: "",
+    required: true,
   },
   passwordConfirmation: {
     value: "",
     error: false,
     message: "",
+    required: true,
   },
   name: {
     value: "",
     error: false,
     message: "",
+    required: true,
   },
   surName: {
     value: "",
     error: false,
     message: "",
+    required: true,
   },
   birthDate: {
     value: "",
     error: false,
     message: "",
+    required: false,
   },
   fullAddress: {
     value: "",
     error: false,
     message: "",
+    required: true,
   },
   step: 1,
 };
@@ -63,8 +70,11 @@ class Form extends React.Component {
 
   checkIfStepHasErrors = (...args) => {
     let hasError = false;
-    args.forEach(({ error }) => {
+    args.forEach((input) => {
+      const error = input.error;
+      const length = input.value.length;
       if (error) hasError = true;
+      if (length === 0 && input.required) hasError = true;
     });
     return hasError;
   };
@@ -101,6 +111,8 @@ class Form extends React.Component {
     const { step, email, password, passwordConfirmation, name, surName, birthDate, fullAddress } =
       this.state;
     const firstStepHasError = this.checkIfStepHasErrors(email, password, passwordConfirmation);
+    const secondStepHasError = this.checkIfStepHasErrors(name, surName, birthDate);
+    const thirdStepHasError = this.checkIfStepHasErrors(fullAddress);
 
     switch (step) {
       case 1:
@@ -117,6 +129,7 @@ class Form extends React.Component {
           <SecondStep
             checkInput={this.setInputError}
             handleChanges={this.handleChanges}
+            stepHasError={secondStepHasError}
             values={this.state}
           />
         );
@@ -125,6 +138,7 @@ class Form extends React.Component {
           <ThirdStep
             checkInput={this.setInputError}
             handleChanges={this.handleChanges}
+            stepHasError={thirdStepHasError}
             values={this.state}
           />
         );
@@ -138,7 +152,8 @@ class Form extends React.Component {
     const { email, password, passwordConfirmation, name, surName, birthDate, fullAddress } =
       this.state;
     const firstStepHasError = this.checkIfStepHasErrors(email, password, passwordConfirmation);
-
+    const secondStepHasError = this.checkIfStepHasErrors(name, surName, birthDate);
+    const thirdStepHasError = this.checkIfStepHasErrors(fullAddress);
     return (
       <div>
         <ul>
@@ -153,10 +168,25 @@ class Form extends React.Component {
             </button>
           </li>
           <li>
-            <button onClick={() => this.changeStep(2)}>second step</button>
+            <button
+              className={`form__changeStepBtn ${
+                secondStepHasError ? "form__changeStepBtn--error" : "form__changeStepBtn--ok"
+              }`}
+              onClick={() => this.changeStep(2)}
+            >
+              second step
+            </button>
           </li>
           <li>
-            <button onClick={() => this.changeStep(3)}> third step</button>
+            <button
+              className={`form__changeStepBtn ${
+                thirdStepHasError ? "form__changeStepBtn--error" : "form__changeStepBtn--ok"
+              }`}
+              onClick={() => this.changeStep(3)}
+            >
+              {" "}
+              third step
+            </button>
           </li>
         </ul>
         <form action="#">
@@ -165,7 +195,12 @@ class Form extends React.Component {
             <button onClick={() => this.changeStep()} type="button">
               Next
             </button>
-            <button type="submit">Send</button>
+            <button
+              disabled={firstStepHasError || secondStepHasError || thirdStepHasError}
+              type="submit"
+            >
+              Send
+            </button>
           </div>
         </form>
       </div>

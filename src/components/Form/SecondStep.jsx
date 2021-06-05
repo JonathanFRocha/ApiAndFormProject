@@ -1,5 +1,7 @@
 import React from "react";
+import { stringCheck, birthdateCheck } from "../../services/checkFormInput";
 
+import "./allSteps.css";
 class SecondStep extends React.Component {
   renderInputError = (inputName) => {
     const inputHasError = this.props.values[inputName].error;
@@ -23,7 +25,11 @@ class SecondStep extends React.Component {
     } = this.props;
 
     return (
-      <fieldset>
+      <fieldset
+        className={`form__fieldset ${
+          stepHasError ? "form__fieldset--error" : "form__fieldset--ok"
+        }`}
+      >
         <input
           name="name"
           id="nameInput"
@@ -33,6 +39,7 @@ class SecondStep extends React.Component {
           placeholder="Name"
           value={namevalue}
           onChange={handleChanges}
+          onBlur={(e) => checkInput(e, stringCheck, "Name", namevalue)}
         />
         <span>{nameErrorMessage}</span>
         <input
@@ -44,6 +51,7 @@ class SecondStep extends React.Component {
           placeholder="Surname"
           value={surNameValue}
           onChange={handleChanges}
+          onBlur={(e) => checkInput(e, stringCheck, "Surname", surNameValue)}
         />
         <span>{surNameErrorMessage}</span>
         <input
@@ -52,9 +60,10 @@ class SecondStep extends React.Component {
           className={this.renderInputError("birthDate")}
           type="date"
           required
-          placeholder="birthDate"
+          placeholder="dd/mm/yyyy"
           value={birthDateValue}
           onChange={handleChanges}
+          onBlur={(e) => checkInput(e, birthdateCheck, birthDateValue)}
         />
         <span>{birthDateErrorMessage}</span>
       </fieldset>

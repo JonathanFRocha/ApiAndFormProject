@@ -3,6 +3,7 @@ import TagCard from "../components/Cats/TagCard";
 import { getTagList } from "../services/api";
 
 import "./Cats.css";
+import loadingImage from "../assets/images/loading.svg";
 
 class Cats extends React.Component {
   constructor() {
@@ -30,7 +31,7 @@ class Cats extends React.Component {
     if (!tagList.length) {
       return (
         <div className="main">
-          <h1>Loading</h1>
+          <img src={loadingImage} alt="spinning loading" />
         </div>
       );
     } else return <div className="main">{this.renderTagList()}</div>;

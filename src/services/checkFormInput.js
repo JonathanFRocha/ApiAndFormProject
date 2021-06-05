@@ -24,3 +24,33 @@ export const passwordCheck = (password, passwordConfirmation = "") => {
     }
   }
 };
+
+export const stringCheck = (name, value) => {
+  if (value.trim() === "") {
+    return `${name} is required`;
+  } else {
+    return null;
+  }
+};
+
+export const birthdateCheck = (date) => {
+  if (!date) return null;
+
+  const currentDate = new Date();
+  const informedDate = new Date(date);
+
+  if (currentDate < informedDate) {
+    return "birthdate in the future";
+  }
+  return null;
+};
+
+export const fullAddressCheck = (address) => {
+  if (address.trim() === "") {
+    return "Address is required";
+  } else if (address.length < 6) {
+    return "Address must have at least 7 characters";
+  } else {
+    return null;
+  }
+};
