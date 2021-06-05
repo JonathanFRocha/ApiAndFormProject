@@ -1,3 +1,4 @@
+//            Checa se o email é valido e se algo foi digitado. Caso Contrário devolve uma mensagem que será usada como erro
 export const emailCheck = (email) => {
   const re = /\S+@\S+\.\S+/;
   if (re.test(email)) {
@@ -9,6 +10,8 @@ export const emailCheck = (email) => {
   return "Enter a valid email";
 };
 
+//            Checa se a senha é maior que 7 digitos, além disso também checa se a senha bate com a senha de confirmação.
+//            Caso Contrário devolve uma mensagem que será usada como erro
 export const passwordCheck = (password, passwordConfirmation = "") => {
   if (!passwordConfirmation) {
     if (password.length >= 8) {
@@ -25,6 +28,9 @@ export const passwordCheck = (password, passwordConfirmation = "") => {
   }
 };
 
+//            Checa se algo foi digitado no input name e surname.
+//            Caso Contrário devolve uma mensagem que será usada como erro
+
 export const stringCheck = (name, value) => {
   if (value.trim() === "") {
     return `${name} is required`;
@@ -32,6 +38,9 @@ export const stringCheck = (name, value) => {
     return null;
   }
 };
+
+//            Checa se a data é anterior e data de HOJE.
+//            Caso Contrário devolve uma mensagem que será usada como erro
 
 export const birthdateCheck = (date) => {
   if (!date) return null;
@@ -44,6 +53,8 @@ export const birthdateCheck = (date) => {
   }
   return null;
 };
+
+// Checa se o endereço foi digitado e se tem pelo menos 7 caractéres no input, caso contrário devolve uma mensagem que será usada como erro.
 
 export const fullAddressCheck = (address) => {
   if (address.trim() === "") {

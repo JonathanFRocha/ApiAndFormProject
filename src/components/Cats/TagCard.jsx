@@ -12,9 +12,9 @@ class TagCard extends React.Component {
     };
   }
 
+  // baseado no estado clicked é feito um calculo para expandir o card ou então deixar o tamanho como Null
   checkNeedForCollapse = (contentElement) => {
     const { clicked } = this.state;
-    console.log(clicked);
     if (!clicked) {
       contentElement.style.maxHeight = null;
     } else {
@@ -22,7 +22,9 @@ class TagCard extends React.Component {
       contentElement.style.maxHeight = `${contentSize}px`;
     }
   };
-
+  // é feito uma chamada para a API, onde é então filtrado baseado na tag e então atualiza os ids deste componente.
+  // caso já tenha sido feito uma chamada anterior, então não é feito uma nova chamada
+  // após ambos os casos é atualizado o estado clicked e então é verificado se o elemento tem de expandir ou encolher quando clicado na tag.
   handleTagClick = async (event) => {
     const contentElement = event.target.nextElementSibling;
     const hasId = this.state.ids.length > 0;
@@ -44,6 +46,7 @@ class TagCard extends React.Component {
     }
   };
 
+  // renderiza os ids mas não aparece. Tudo depende da checkNeedForCollapse
   renderIds() {
     const { ids } = this.state;
 

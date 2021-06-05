@@ -1,3 +1,4 @@
+//          As funções abaixo fazem uma chamada para as respectivas urls e devolvem na page Cats
 export const getTagList = async () => {
   try {
     const res = await fetch("https://cataas.com/api/tags");

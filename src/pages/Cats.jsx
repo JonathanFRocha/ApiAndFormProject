@@ -13,12 +13,14 @@ class Cats extends React.Component {
     };
   }
 
+  // quando o componente é montado, é feito uma chamada para a api que vai retornar as tags e então atualiza o state
   async componentDidMount() {
     const resTagList = await getTagList();
 
     this.setState({ tagList: resTagList });
   }
 
+  //   Renderiza as tags baseadas na taglist
   renderTagList = () => {
     const { tagList } = this.state;
 
