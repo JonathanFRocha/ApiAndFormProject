@@ -1,5 +1,5 @@
 import React from "react";
-import { getCatList } from "../services/api";
+import { getCatList } from "../../services/api";
 
 import "./TagCard.css";
 
