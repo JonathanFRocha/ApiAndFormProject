@@ -87,3 +87,9 @@
   color: #747c81;
   background-color: #e3e8ec;
 }
+
+.form__changeStepBtn--active {
+  background-color: #e6e6e6;
+  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+}

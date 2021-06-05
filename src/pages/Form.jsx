@@ -149,7 +149,7 @@ class Form extends React.Component {
 
   render() {
     const currentForm = this.renderFormStep();
-    const { email, password, passwordConfirmation, name, surName, birthDate, fullAddress } =
+    const { email, password, passwordConfirmation, name, surName, birthDate, fullAddress, step } =
       this.state;
     const firstStepHasError = this.checkIfStepHasErrors(email, password, passwordConfirmation);
     const secondStepHasError = this.checkIfStepHasErrors(name, surName, birthDate);
@@ -161,7 +161,7 @@ class Form extends React.Component {
             <button
               className={`form__changeStepBtn ${
                 firstStepHasError ? "form__changeStepBtn--error" : "form__changeStepBtn--ok"
-              }`}
+              } ${step === 1 ? "form__changeStepBtn--active" : ""}`}
               onClick={() => this.changeStep(1)}
             >
               1
@@ -171,7 +171,7 @@ class Form extends React.Component {
             <button
               className={`form__changeStepBtn ${
                 secondStepHasError ? "form__changeStepBtn--error" : "form__changeStepBtn--ok"
-              }`}
+              } ${step === 2 ? "form__changeStepBtn--active" : ""}`}
               onClick={() => this.changeStep(2)}
             >
               2
@@ -181,7 +181,7 @@ class Form extends React.Component {
             <button
               className={`form__changeStepBtn ${
                 thirdStepHasError ? "form__changeStepBtn--error" : "form__changeStepBtn--ok"
-              }`}
+              } ${step === 3 ? "form__changeStepBtn--active" : ""}`}
               onClick={() => this.changeStep(3)}
             >
               3
